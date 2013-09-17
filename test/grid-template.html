@@ -1,0 +1,42 @@
+<div class="bist-grid">
+   <div class="control-group" style="float:right">
+      <i class="icon-search" style="float: none; margin-right: 10px" />
+      
+      {{i18n.total}} <span id="grid-total">{{filteredData.length}}</span>
+      <input type="text" style="float:right;" class="input-medium search-query search-box"
+      ng-model="searchText" placeholder="{{i18n.filter}}" name="filter" />
+   </div>
+   <table class="table table-bordered table-striped" placeholder="{{i18n.filter}}">
+      <thead>
+         <tr>
+            <th ng-repeat="column in columns">
+               <a class="header-{{$index}}" ng-click="sort(column)" ng-disabled="options.sorting">
+                  {{column.title}}
+               </a>
+            </th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="row in filteredData = (transformedData | orderBy:sortExpression:reverseOrder | filter:searchText)"
+         ng-click="onClick(row)" ng-dblclick="onDoubleClick()" ng-class="{selected: row == selectedRow}">
+            <td ng-repeat="column in columns">
+               {{row[column.field]}}
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <div class="pagination pagination-left" ng-show="options.paging">
+      <ul>
+         <li ng-class="{disabled: page == 1}">
+            <a id="prev-page" ng-click="prev()">{{i18n.prev}}</a>
+         </li>
+         <li ng-repeat="pageIndex in pageIndices" ng-class="{active: page==pageIndex, disabled: pageIndex==\'\u2026\'}">
+            <a id={{ "pagenumber-"+pageIndex}} ng-click="page(pageIndex)">{{pageIndex}}</a>
+         </li>
+         </li>
+         <li ng-class="angri.filteredList() | angri_filter_lastPage:angri.limit | angri_filter_equal:angri.page:\'disabled\'">
+            <a id="next-page" ng-click="next()">{{i18n.next}}</a>
+         </li>
+      </ul>
+   </div>
+</div>

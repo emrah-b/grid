@@ -1,0 +1,53 @@
+.bist-grid {
+    width: 100%;
+    clear: both;
+    position: relative;
+}
+
+.bist-grid tr {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bist-grid tr:hover {
+    background-color: #f8f8f8;
+}
+
+.bist-grid tr.selected td {
+    background-color: #e8f1f8 !important;
+}
+
+.bist-grid table {
+    table-layout: fixed;
+}
+
+.bist-grid td {
+    border-right: 1px solid #d3dfff;
+}
+
+.bist-grid td:last-child {
+    border-right: 0px solid #ff0000;
+}
+.bist-grid tr:last-child {
+    border-bottom: 1px solid #dadada;
+}
+
+.bist-grid th i {
+    float: right;
+    text-decoration: none;
+    padding-top: 4px;
+    color: #636363;
+}
+
+.grid-icon {
+   font-size: 22px !important;
+}
+
+td.grid-action-cell {
+   width: 10%;
+}

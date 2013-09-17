@@ -1,0 +1,18 @@
+<html ng-app="test-app">
+<head>
+   <meta charset="utf-8">
+   <title>Grid Test</title>
+   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="../css/grid.css" />
+</head>
+<body ng-controller="TestGridCtrl">
+
+   <grid data="employees" columns="columns" sort-expression="[employeeId]"/>
+
+   <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+   <script src='lib/angular.js'></script>
+   <script src='../grid.js'></script>
+   <script src='app.js'></script>
+</body>
+</html>
