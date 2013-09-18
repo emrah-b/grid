@@ -25,7 +25,11 @@ app.controller("TestGridCtrl", function($scope) {
       {title: "Salary", field: "salary", filter: "currency:'$ '"}
    ];
 
-   $scope.gridOptions = {};
+   // $scope.gridOptions = {
+   //    pageSize: 20,
+   //    sorting: false,
+   //    paging: false
+   // };
 
    $scope.assignSelectedRow = function(row){
       $scope.selectedRow =  row;

@@ -29,7 +29,6 @@
    }
 
    var defaultGridOptions = {
-      deepLinking: true,
       searching : true,
       selectable: true,
       sorting: true,
@@ -47,7 +46,7 @@
       return numberArray;
    }
 
-   gridModule.directive("grid", function($filter) {
+   gridModule.directive("grid", function($filter, $location) {
       return {
          restrict: "E",
          replace: true,
@@ -70,6 +69,14 @@
             })
 
             scope.options = defaultGridOptions;
+
+            // Apply user options to default options
+            if(scope.gridOptions) {
+               angular.forEach(Object.keys(scope.gridOptions), function(option) {
+                  scope.options[option] = scope.gridOptions[option];
+               });
+            }
+
             scope.pageIndex = 1;
 
             scope.sort = function(column) {
@@ -78,7 +85,8 @@
             };
 
             scope.onClick = function(row) {
-               scope.toggleRow(row);
+               if(scope.options.selectable)
+                  scope.toggleRow(row);
                
                if(scope.clickCallback)
                   scope.clickCallBack(row);

@@ -7,7 +7,7 @@
 </head>
 <body ng-controller="TestGridCtrl">
 
-   <grid data="employees" columns="columns" sort-expression="[employeeId]" gridOptions="gridOptions" double-click-callback="assignSelectedRow"></grid>
+   <grid data="employees" columns="columns" sort-expression="[employeeId]" grid-options="gridOptions" double-click-callback="assignSelectedRow"></grid>
 
    <pre ng-show="selectedRow"> 
       <button ng-click="selectedRow = null">Clear</button>

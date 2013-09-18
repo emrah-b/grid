@@ -10,7 +10,10 @@
       <thead>
          <tr>
             <th ng-repeat="column in columns">
-               <a class="header-{{$index}}" ng-click="sort(column)" ng-disabled="options.sorting">
+               <a class="header-{{$index}}" ng-click="sort(column)" ng-show="options.sorting">
+                  {{column.title}}
+               </a>
+               <span class="header-{{$index}}" ng-show="!options.sorting">
                   {{column.title}}
                </a>
             </th>
@@ -37,7 +40,7 @@
             </span>
          </li>
          <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="next()">{{i18n.next}} </a></li>
-         <li ng-class="{disabled: pageIndex == numberOfPages()}" ng-show="numberOfPages() > 1"><a ng-click="last()">{{ i18n.last }} »</a></li>
+         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="last()">{{ i18n.last }} »</a></li>
       </ul>
    </div>
 </div>
