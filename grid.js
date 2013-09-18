@@ -34,13 +34,13 @@
       selectable: true,
       sorting: true,
       paging: true,
-      pageSize: 3
+      pageSize: 10
    }
 
    // ng-repeat does not accept ranges as of now, need to provide a collection
-   var generateNumberArray = function(numberOfItems) {
+   var generateNumberArray = function(lowerBound, upperBound) {
       var numberArray = [];
-      for(i = 1; i <= numberOfItems ; i++) {
+      for(i = lowerBound; i <= upperBound ; i++) {
          numberArray.push(i);
       }
 
@@ -56,14 +56,18 @@
             columns: "=",
             data: "=",
             gridOptions: "=",
-            rowClick:"&",
-            rowDoubleClick:"&",
+            clickCallback:"=",
+            doubleClickCallback:"=",
             sortExpression: "@"
          },
          link: function(scope, element, attrs, ctrl) {
             // apply display filters
             scope.transformedData = applyFilters(scope.data, scope.columns, scope.$eval);
             scope.i18n = i18n;
+
+            scope.$watch('pageIndex', function(newValue) {
+               scope.pageIndexInput = scope.pageIndex;
+            })
 
             scope.options = defaultGridOptions;
             scope.pageIndex = 1;
@@ -75,11 +79,14 @@
 
             scope.onClick = function(row) {
                scope.toggleRow(row);
-               scope.rowClick();
+               
+               if(scope.clickCallback)
+                  scope.clickCallBack(row);
             };
 
             scope.onDoubleClick = function(row) {
-               scope.rowDoubleClick();
+               if(scope.doubleClickCallback)
+                  scope.doubleClickCallback(row);
             };
 
             scope.toggleRow = function(row) {
@@ -89,7 +96,7 @@
             scope.numberOfPages = function() {
                if(!scope.filteredData()) return 0;
 
-               return Math.ceil(scope.filteredData().length / scope.options.pageSize);
+               return Math.max(Math.ceil(scope.filteredData().length / scope.options.pageSize), 1);
             };
 
             scope.filteredData = function() {
@@ -124,6 +131,18 @@
 
             scope.next = function(){
                scope.pageIndex = Math.min(scope.pageIndex + 1, scope.numberOfPages());
+            };
+
+            scope.goToPage = function(destinationIndex){
+               if(destinationIndex < 1) destinationIndex = 1;
+
+               if(destinationIndex > scope.numberOfPages()) destinationIndex = scope.numberOfPages();
+
+               scope.pageIndex = destinationIndex;
+            };
+
+            scope.pageIndices = function() {
+               return generateNumberArray(1, scope.numberOfPages());   
             };
          }  
       }

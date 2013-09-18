@@ -18,7 +18,7 @@
       </thead>
       <tbody>
          <tr ng-repeat="row in pageData(pageIndex)"
-         ng-click="onClick(row)" ng-dblclick="onDoubleClick()" ng-class="{selected: row == selectedRow}">
+         ng-click="onClick(row)" ng-dblclick="onDoubleClick(row)" ng-class="{selected: row == selectedRow}">
             <td ng-repeat="column in columns">
                {{row[column.field]}}
             </td>
@@ -27,11 +27,17 @@
    </table>
    <div ng-show="options.paging">
       <ul class="pagination">
-         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="first()" ng-disabled="pageIndex == 1"> « {{i18n.first}}</a></li>
-         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="prev()">{{i18n.previous}}</a></li>
-         
-         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="next()">{{i18n.next}}</a></li>
-         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="last()">{{i18n.last}} »</a></li>
+         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="first()">« {{i18n.first}} </a></li>
+         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="prev()"> {{i18n.previous}}</a></li>
+         <li class="pageIndexInput">
+            <span>
+               <form ng-submit="goToPage(pageIndexInput)">
+                  <input type="text" id="pageInput" ng-model="pageIndexInput"> / {{numberOfPages()}}
+               </form> 
+            </span>
+         </li>
+         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="next()">{{i18n.next}} </a></li>
+         <li ng-class="{disabled: pageIndex == numberOfPages()}" ng-show="numberOfPages() > 1"><a ng-click="last()">{{ i18n.last }} »</a></li>
       </ul>
    </div>
 </div>

@@ -51,3 +51,23 @@
 td.grid-action-cell {
    width: 10%;
 }
+
+
+li.pageIndexInput span {
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border: none;
+    margin-left:2px;
+}
+
+li.pageIndexInput form {
+    margin-bottom: 0px;
+}
+
+li.pageIndexInput input{
+    width: 33px;
+    border: 1px solid;
+    text-align: center;
+    padding: 2px;
+}
+

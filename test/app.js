@@ -26,4 +26,8 @@ app.controller("TestGridCtrl", function($scope) {
    ];
 
    $scope.gridOptions = {};
+
+   $scope.assignSelectedRow = function(row){
+      $scope.selectedRow =  row;
+   }
 });

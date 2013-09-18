@@ -7,8 +7,13 @@
 </head>
 <body ng-controller="TestGridCtrl">
 
-   <grid data="employees" columns="columns" sort-expression="[employeeId]" gridOptions="gridOptions"></grid>
+   <grid data="employees" columns="columns" sort-expression="[employeeId]" gridOptions="gridOptions" double-click-callback="assignSelectedRow"></grid>
 
+   <pre ng-show="selectedRow"> 
+      <button ng-click="selectedRow = null">Clear</button>
+      <br>
+      {{selectedRow | json}} 
+   </pre>
 
    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
