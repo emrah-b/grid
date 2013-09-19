@@ -1,0 +1,31 @@
+{
+  "name": "grid",
+  "version": "0.0.1",
+  "description": "__Contributors:__",
+  "main": "ng-grid.min.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saparatus/grid.git"
+  },
+  "keywords": [
+    "angular",
+    "grid",
+    "angularjs",
+    "simple",
+    "bootstrap"
+  ],
+  "author": "Emrah Bayraktaroglu",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.7",
+    "grunt-karma": "~0.4.4",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-angular-templates": "~0.3.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jasmine": "~0.3.3"
+  }
+}
