@@ -48,10 +48,9 @@
    font-size: 22px !important;
 }
 
-td.grid-action-cell {
-   width: 10%;
+.grid-pagination {
+    text-align: center;
 }
-
 
 li.pageIndexInput span {
     padding-bottom: 3px;
@@ -66,7 +65,7 @@ li.pageIndexInput form {
 
 li.pageIndexInput input{
     width: 33px;
-    border: 1px solid;
+    border: 1px solid #ddd;
     text-align: center;
     padding: 2px;
 }

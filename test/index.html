@@ -2,12 +2,12 @@
 <head>
    <meta charset="utf-8">
    <title>Grid Test</title>
-   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
    <link rel="stylesheet" href="../css/grid.css" />
 </head>
 <body ng-controller="TestGridCtrl">
-
-   <grid data="employees" columns="columns" sort-expression="[employeeId]" grid-options="gridOptions" double-click-callback="assignSelectedRow"></grid>
+   <grid data="employees" columns="columns" sort-expression="employeeId" grid-options="gridOptions" double-click-callback="assignSelectedRow"></grid>
 
    <pre ng-show="selectedRow"> 
       <button ng-click="selectedRow = null">Clear</button>

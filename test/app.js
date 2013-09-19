@@ -17,12 +17,12 @@ app.controller("TestGridCtrl", function($scope) {
    ];
 
    $scope.columns = [
-      {title:"Employee Id", field: "employeeId"},
+      {title:"Employee Id", field: "employeeId", width: "7%"},
       {title:"First Name", field: "firstName"},
       {title:"Last Name", field: "lastName"},
       {title:"Department", field: "department"},
       {title: "Birthday", field: "birthday", filter: "date:'dd.MM.yyyy'"},
-      {title: "Salary", field: "salary", filter: "currency:'$ '"}
+      {title: "Salary", field: "salary", filter: "currency:'$ '", width: "10%"}
    ];
 
    // $scope.gridOptions = {

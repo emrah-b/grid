@@ -20,12 +20,8 @@
    }
 
    var i18n = {
-      filter: "Aranacak metni giriniz...",
-      first: "İlk sayfa",
-      last: "Son sayfa",
-      next: "Sonraki",
-      previous: "Önceki",
-      total: "Toplam"
+      filter: "Type to search...",
+      total: "Total"
    }
 
    var defaultGridOptions = {
