@@ -4,47 +4,44 @@ angular.module("grid").factory("gridUtils", function() {
          var transformedData = [];
          angular.forEach(rows, function(row) {
             var transformedRow = {};
+            
             angular.forEach(columns, function (column){
                var displayValue =  row[column.field];
 
                if(column.filter) {
-                  displayValue = evaluationFn(displayValue + " | " + column.filter);
+                  displayValue = evaluationFn("\"" + displayValue + "\" | " + column.filter);
                }  
+
+               if(column.renderFn) {
+                  displayValue = column.renderFn(displayValue);
+               }
+
+               if(!column.width) {
+                  column.width = "auto";
+               }
 
                transformedRow[column.field] = displayValue;   
             });
+
             transformedData.push(transformedRow);
          });
          return transformedData;   
-      },
-      getPageData: function(data, pageSize, pageIndex) {
-         if(pageIndex < 1) pageIndex = 1;
+         },
+         calculateNumberOfPages: function(data, pageSize) {
+            if(!data) return 0;
 
-         var lowerBound = (pageIndex - 1) * pageSize;
-         var upperBound = lowerBound + pageSize;
+            return Math.max(Math.ceil(data.length / pageSize), 1);
+         },
+         applyUserOptions: function(userOptions, defaultOptions) {
+            var options = defaultOptions;
 
-         var pageData = [];
+            if(userOptions) {
+              angular.forEach(Object.keys(userOptions), function(option) {
+                 options[option] = userOptions[option];
+              });
+            }
 
-         if(data.length > 0)
-            pageData = data.slice(lowerBound, upperBound);
-
-         return pageData;
-      },
-      calculateNumberOfPages: function(data, pageSize) {
-         if(!data) return 0;
-
-         return Math.max(Math.ceil(data.length / pageSize), 1);
-      },
-      applyUserOptions: function(userOptions, defaultOptions) {
-         var options = defaultOptions;
-
-         if(userOptions) {
-            angular.forEach(Object.keys(userOptions), function(option) {
-               options[option] = userOptions[option];
-            });
-         }
-
-         return options;
+            return options;
       }
    }
 });

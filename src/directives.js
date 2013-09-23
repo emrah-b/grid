@@ -7,16 +7,17 @@ angular.module("grid").directive("grid", function($filter, $location, gridUtils,
          columns: "=",
          data: "=",
          gridOptions: "=",
-         clickCallback:"=",
-         doubleClickCallback:"=",
+         clickCallback: "=",
+         doubleClickCallback: "=",
          sortExpression: "@"
       },
       link: function(scope, element, attrs, ctrl) {
-         // apply display filters
-         scope.transformedData = gridUtils.applyFilters(scope.data, scope.columns, scope.$eval);
-
-         scope.$watch('pageIndex', function(newValue) {
+         scope.$watch('pageIndex', function() {
             scope.pageIndexInput = scope.pageIndex;
+         })
+
+         scope.$watch('data', function() {
+            scope.transformedData = gridUtils.applyFilters(scope.data, scope.columns, scope.$eval);
          })
 
          scope.options = gridUtils.applyUserOptions(scope.gridOptions, defaultGridOptions);
@@ -31,53 +32,42 @@ angular.module("grid").directive("grid", function($filter, $location, gridUtils,
          };
 
          scope.onClick = function(row, index) {
-            if(scope.options.selectable)
-               scope.selectedIndex = index;
-            
-            if(scope.clickCallback)
-               scope.clickCallBack(row);
+            if (scope.options.selectable) scope.selectedIndex = index;
+
+            if (scope.clickCallback) scope.clickCallBack(row);
          };
 
          scope.onDoubleClick = function(row) {
-            if(scope.doubleClickCallback)
-               scope.doubleClickCallback(row);
+            if (scope.doubleClickCallback) scope.doubleClickCallback(row);
          };
 
          scope.numberOfPages = function() {
-            return gridUtils.calculateNumberOfPages(scope.filteredData(), scope.options.pageSize);
-         }
+            return gridUtils.calculateNumberOfPages(scope.filteredData, scope.options.pageSize);
+         };
 
-         scope.filteredData = function() {
-            return scope.$eval("transformedData | orderBy:sortExpression:reverseOrder | filter:searchText");
-         }
-
-         scope.pageData = function() {
-            return gridUtils.getPageData(scope.filteredData(), scope.options.pageSize, scope.pageIndex);
-         }
-
-         scope.first = function(){
+         scope.first = function() {
             scope.pageIndex = 1;
          };
 
-         scope.prev = function(){
+         scope.prev = function() {
             scope.pageIndex = Math.max(scope.pageIndex - 1, 1);
          };
 
-         scope.last = function(){
+         scope.last = function() {
             scope.pageIndex = scope.numberOfPages();
          };
 
-         scope.next = function(){
+         scope.next = function() {
             scope.pageIndex = Math.min(scope.pageIndex + 1, scope.numberOfPages());
          };
 
-         scope.goToPage = function(pageIndex){
-            if(pageIndex < 1) pageIndex = 1;
+         scope.goToPage = function(pageIndex) {
+            if (pageIndex < 1) pageIndex = 1;
 
-            if(pageIndex > scope.numberOfPages()) pageIndex = scope.numberOfPages();
+            if (pageIndex > scope.numberOfPages) pageIndex = scope.numberOfPages();
 
             scope.pageIndex = pageIndex;
          };
-      }  
+      }
    }
 });

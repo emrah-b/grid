@@ -86,6 +86,7 @@ module.exports = function (grunt) {
             'src/i18n.js',
             'src/directives.js',
             'src/services.js',
+            'src/filters.js',
             'build/templates.js'
         ],
         ngtemplates: {
@@ -158,11 +159,7 @@ module.exports = function (grunt) {
         grunt.log.write('The old default task has been moved to "build" to prevent accidental triggering');
     });
 
-    // grunt.registerTask('debug', ['less', 'ngtemplates', 'concat:debug', 'clean']);
-    // grunt.registerTask('prod', ['less', 'ngtemplates', 'concat:prod', 'uglify', 'clean']);
-    // grunt.registerTask('version', ['ngtemplates', 'concat:version', 'uglify:version', 'clean']);
-
-    grunt.registerTask('debug', ['ngtemplates', 'concat:debug']);
-    grunt.registerTask('prod', ['ngtemplates', 'concat:prod']);
-    grunt.registerTask('version', ['ngtemplates', 'concat:version']);
+    grunt.registerTask('debug', ['ngtemplates', 'concat:debug', 'clean']);
+    grunt.registerTask('prod', ['ngtemplates', 'concat:prod', 'clean']);
+    grunt.registerTask('version', ['ngtemplates', 'concat:version', 'clean']);
 };

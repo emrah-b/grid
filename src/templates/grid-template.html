@@ -1,6 +1,6 @@
 <div class="grid">
    <div class="control-group search-box" ng-show="options.searching">
-      <span id="grid-total" class="pull-left">{{i18n.total}}: {{filteredData().length}}</span>
+      <span id="grid-total" class="pull-left">{{i18n.total}}: {{filteredData.length}}</span>
       <span class="pull-right" id="search-box">
          <i class="icon-search" style="float: none; margin-right: 10px" />
          <input type="text" class="input-medium search-query search-box"
@@ -10,7 +10,7 @@
    <table class="table table-bordered table-striped" placeholder="{{i18n.filter}}">
       <thead>
          <tr>
-            <th ng-repeat="column in columns" ng-hide="column.hidden" style="width: {{column.width}}">
+            <th ng-repeat="column in columns" ng-hide="column.hidden" width="{{column.width}}" style="width: {{column.width}}">
                <a class="header-{{$index}}" ng-click="sort(column)" ng-show="options.sorting">
                   {{column.title}}
                   <i ng-class="{'icon-sort-by-alphabet-alt' : sortExpression==column.field && reverseOrder ,'icon-sort-by-alphabet': sortExpression == column.field && !reverseOrder, 'icon-sort-by-attributes': sortExpression != column.field}" ></i>
@@ -22,18 +22,18 @@
          </tr>
       </thead>
       <tbody>
-         <tr ng-repeat="row in pageData()"
+         <tr ng-repeat="row in filteredData = (transformedData | orderBy:sortExpression:reverseOrder | filter:searchText ) | sliceByPage:options.pageSize:pageIndex"
          ng-click="onClick(row, $index)" ng-dblclick="onDoubleClick(row)" ng-class="{selected: $index == selectedIndex}">
-            <td ng-repeat="column in columns" ng-hide="column.hidden" style="width: {{column.width}}">
+            <td ng-repeat="column in columns" ng-hide="column.hidden" style="width: {{column.width}}" ng-bind-html-unsafe="row[column.field]">
                {{row[column.field]}}
             </td>
          </tr>
       </tbody>
    </table>
-   <div ng-show="options.paging" class="grid-pagination">
+   <div ng-show="options.paging" class="pagination grid-pagination">
       <ul class="pagination">
-         <li ng-class="{disabled: pageIndex == 1}" ><a ng-click="first()"><i class="grid-icon icon-double-angle-left"></i></a></li>
-         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="prev()"><i class="grid-icon icon-angle-left"></i> </a></li>
+         <li ng-class="{disabled: pageIndex == 1}" ><a ng-click="first()" title="{{i18n.firstPage}}"><i class="grid-icon icon-double-angle-left"></i></a></li>
+         <li ng-class="{disabled: pageIndex == 1}"><a ng-click="prev()" title="{{i18n.previousPage}}"><i class="grid-icon icon-angle-left"></i> </a></li>
          <li class="pageIndexInput">
             <span>
                <form ng-submit="goToPage(pageIndexInput)">
@@ -41,8 +41,8 @@
                </form> 
             </span>
          </li>
-         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="next()"><i class="grid-icon icon-angle-right"></i> </a></li>
-         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="last()"><i class="grid-icon icon-double-angle-right"></i></a></li>
+         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="next()" title="{{i18n.nextPage}}"><i class="grid-icon icon-angle-right"></i> </a></li>
+         <li ng-class="{disabled: pageIndex == numberOfPages()}"><a ng-click="last()" title="{{i18n.lastPage}}"><i class="grid-icon icon-double-angle-right"></i></a></li>
       </ul>
    </div>
 </div>

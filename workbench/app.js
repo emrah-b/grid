@@ -16,9 +16,13 @@ app.controller("TestGridCtrl", function($scope) {
       {employeeId: 12, firstName: "Şeyma", lastName: "Smith", department: "Legal", birthday: 450997200000, salary: 123123}
    ];
 
+   var xyz = function(text) {
+      return "<a href='http://google.com?q="+text+"'>"+text+"</a>";
+   }
+
    $scope.columns = [
       {title:"Employee Id", field: "employeeId", width: "10%"},
-      {title:"First Name", field: "firstName"},
+      {title:"First Name", field: "firstName", renderFn: xyz},
       {title:"Last Name", field: "lastName"},
       {title:"Department", field: "department"},
       {title: "Birthday", field: "birthday", filter: "date:'dd.MM.yyyy'"},
@@ -26,7 +30,8 @@ app.controller("TestGridCtrl", function($scope) {
    ];
 
    $scope.gridOptions = {
-      pageSize: 5
+      pageSize: 5,
+      i18n: 'en'
    }
 
    $scope.assignSelectedRow = function(row){
